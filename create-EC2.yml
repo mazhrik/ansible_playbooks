@@ -15,26 +15,7 @@
      region: us-east-1
      security_group: ec2-security-group
    
-   tasks:
-   
-     - name: Create a security group
-       ec2_group:
-        name: "{{ security_group }}"
-        description: Security Group for webserver Servers
-        region: "{{ region }}"
-        rules:
-          - proto: tcp
-            ports:
-              - 22
-              - 8080
-              - 80
-              - 443
-            cidr_ip: 0.0.0.0/0
-        rules_egress:
-          - proto: all
-            cidr_ip: 0.0.0.0/0
-       register: basic_firewall
-     
+   tasks:  
      - name: Launch the new EC2 Instance
        ec2:
          instance_type: "{{ instance_type }}"
