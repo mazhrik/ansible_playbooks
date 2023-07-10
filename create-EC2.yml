@@ -25,7 +25,7 @@
        register: ec2
      - name: Task # 3 Add Tagging to EC2 instance
        amazon.aws.ec2_tag:
-         resource_id: "{{ item.id }}"
+         resource: "{{ item.id }}"
          region: "{{ region }}"
          state: present
          tags:
