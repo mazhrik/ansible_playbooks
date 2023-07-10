@@ -4,7 +4,7 @@
    connection: local
    gather_facts: False
    tags: provisioning
-
+   
    vars:
      keypair: mySep22Key
      instance_type: t2.micro
@@ -16,9 +16,9 @@
      security_group: ec2-security-group
    
    tasks:
-
+   
      - name: Create a security group
-       local_action: 
+       ec2_group: 
          module: ec2_group
          name: "{{ security_group }}"
          description: Security Group for webserver Servers
@@ -46,8 +46,7 @@
        register: basic_firewall
      
      - name: Launch the new EC2 Instance
-       local_action:  ec2 
-                      group={{ security_group }} 
+       ec2_instance:  group={{ security_group }} 
                       instance_type={{ instance_type}} 
                       image={{ image }} 
                       wait=true 
@@ -56,8 +55,10 @@
                       count={{count}}
        register: ec2
      - name: Task # 3 Add Tagging to EC2 instance
-       local_action: ec2_tag resource={{ item.id }} region={{ region }} state=present
-       with_items: "{{ ec2.instances }}"
-       args:
-         tags:
-           Name: MyTargetEc2Instance
+       ec2_tag:  
+       resource_id: "{{ item.id }}"
+        region: "{{ region }}"
+        state: present
+        tags:
+          Name: MyTargetEc2Instance
+    
