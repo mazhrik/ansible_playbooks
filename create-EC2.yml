@@ -47,13 +47,13 @@
      
      - name: Launch the new EC2 Instance
        amazon.aws.ec2_instance:  
-                      group={{ security_group }} 
-                      instance_type={{ instance_type}} 
-                      image={{ image }} 
-                      wait=true 
-                      region={{ region }} 
-                      keypair={{ keypair }}
-                      count={{count}}
+              group={{ security_group }} 
+              instance_type={{ instance_type}} 
+              image={{ image }} 
+              wait=true 
+              region={{ region }} 
+              keypair={{ keypair }}
+              count={{count}}
        register: ec2
      - name: Task # 3 Add Tagging to EC2 instance
        amazon.aws.ec2_tag:
