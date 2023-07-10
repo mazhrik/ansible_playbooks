@@ -18,7 +18,7 @@
    tasks:
    
      - name: Create a security group
-       ec2_group: 
+       amazon.aws.ec2_group: 
          module: ec2_group
          name: "{{ security_group }}"
          description: Security Group for webserver Servers
@@ -46,7 +46,7 @@
        register: basic_firewall
      
      - name: Launch the new EC2 Instance
-       ec2_instance:  group={{ security_group }} 
+       amazon.aws.ec2_instance:  group={{ security_group }} 
                       instance_type={{ instance_type}} 
                       image={{ image }} 
                       wait=true 
@@ -55,7 +55,7 @@
                       count={{count}}
        register: ec2
      - name: Task # 3 Add Tagging to EC2 instance
-       ec2_tag:
+       amazon.aws.ec2_tag:
          resource_id: "{{ item.id }}"
          region: "{{ region }}"
          state: present
