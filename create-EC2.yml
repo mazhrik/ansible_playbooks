@@ -24,7 +24,6 @@
          count: "{{ count }}"
          region: "{{ region }}"
          key_name: "{{ keypair }}"
-         group: "{{ security_group }}"
        register: ec2
      - name: Task # 3 Add Tagging to EC2 instance
        amazon.aws.ec2_tag:
