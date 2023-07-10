@@ -7,7 +7,7 @@
    
    vars:
      instance_type: t2.micro
-     image: ami-0507f77897697c4ba
+     image: ami-0ee23bfc74a881de5
      wait: yes
      group: webserver
      count: 1
